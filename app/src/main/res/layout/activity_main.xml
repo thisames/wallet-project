@@ -5,6 +5,17 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Exibição do Saldo -->
+    <TextView
+        android:id="@+id/balanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Saldo:"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Exibição do Endereço -->
     <TextView
         android:id="@+id/addressLabel"
         android:layout_width="wrap_content"
@@ -21,6 +32,7 @@
         android:text="Generating address..."
         android:textSize="16sp" />
 
+    <!-- Exibição da Chave Privada -->
     <TextView
         android:id="@+id/privateKeyLabel"
         android:layout_width="wrap_content"
@@ -38,10 +50,11 @@
         android:text="Generating private key..."
         android:textSize="16sp" />
 
+    <!-- Botão para criar a carteira -->
     <Button
         android:id="@+id/createWalletButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Create Wallet" />
+        android:layout_marginTop="16dp"
+        android:text="Create/Load Wallet" />
 </LinearLayout>
