@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             }, MoreExecutors.directExecutor());
 
             walletAppKit.startAsync();
-            Log.d(TAG, "WalletAppKit startAsync() chamado.");
 
             try {
                 walletAppKit.awaitRunning();
