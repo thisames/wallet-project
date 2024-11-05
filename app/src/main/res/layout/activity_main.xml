@@ -57,4 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Create/Load Wallet" />
+
+    <Button
+        android:id="@+id/openGraphButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Open Bitcoin Graph" />
 </LinearLayout>

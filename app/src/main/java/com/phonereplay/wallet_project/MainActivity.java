@@ -1,5 +1,6 @@
 package com.phonereplay.wallet_project;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         privateKeyText = findViewById(R.id.privateKeyText);
         balanceText = findViewById(R.id.balanceText);
         Button createWalletButton = findViewById(R.id.createWalletButton);
+        Button openGraphButton = findViewById(R.id.openGraphButton); // Botão para abrir o gráfico
 
         createWalletButton.setOnClickListener(v -> {
             if (walletAppKit == null || !walletAppKit.isRunning()) {
@@ -45,7 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Carteira já está carregada e rodando.");
             }
         });
+
+        // Evento de clique para abrir a GraphBitcoin
+        openGraphButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, GraphBitcoin.class);
+            startActivity(intent);
+        });
     }
+
 
     @Override
     protected void onDestroy() {
