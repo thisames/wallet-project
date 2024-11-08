@@ -30,18 +30,16 @@ public class GraphBitcoin extends AppCompatActivity {
     private BinanceApi binanceApi;
     private int xValue = 0;
     private TextView currentPriceText;
+    private float previousPrice = -1; // Variável para armazenar o valor anterior do Bitcoin
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_bitcoin);
 
-        lineChart = findViewById(R.id.lineChart);
-        lineChart.setBackgroundColor(Color.WHITE);
-        lineChart.setDrawGridBackground(false);
-
         currentPriceText = findViewById(R.id.currentPriceText);
 
+        // Configurar o gráfico de linha
         lineChart = findViewById(R.id.lineChart);
         lineDataSet = new LineDataSet(entries, "BTC Price");
         lineDataSet.setColor(Color.BLUE);
@@ -65,7 +63,11 @@ public class GraphBitcoin extends AppCompatActivity {
                 .build();
 
         binanceApi = retrofit.create(BinanceApi.class);
+        if (previousPrice == -1) {
+            fetchPrice();
+        }
 
+        // Atualizar preço em tempo real a cada 5 segundos
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -85,7 +87,7 @@ public class GraphBitcoin extends AppCompatActivity {
                     if (priceResponse != null) {
                         float price = Float.parseFloat(priceResponse.getPrice());
                         updateChart(price);
-                        updatePriceText(price); // Atualiza o TextView com o preço atual
+                        updatePriceText(price);
                     }
                 }
             }
@@ -102,10 +104,25 @@ public class GraphBitcoin extends AppCompatActivity {
         lineDataSet.notifyDataSetChanged();
         lineData.notifyDataChanged();
         lineChart.notifyDataSetChanged();
-        lineChart.invalidate();
+        lineChart.invalidate(); // Redesenhar o gráfico
     }
 
     private void updatePriceText(float price) {
+        // Verifica se o valor anterior foi definido
+        if (previousPrice != -1) {
+            if (price > previousPrice) {
+                currentPriceText.setTextColor(Color.parseColor("#428200")); // Cor verde personalizada
+            } else if (price < previousPrice) {
+                currentPriceText.setTextColor(Color.parseColor("#F63756")); // Cor verde personalizada
+            } else {
+                currentPriceText.setTextColor(Color.BLACK); // Cor preta para inalterado
+            }
+        }
+
+        // Atualiza o TextView com o preço atual formatado
         currentPriceText.setText(String.format("$%.2f", price));
+
+        // Atualiza o valor anterior
+        previousPrice = price;
     }
 }
