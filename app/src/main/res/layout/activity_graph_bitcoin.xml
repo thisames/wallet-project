@@ -1,11 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="16dp"> <!-- Define o fundo branco -->
 
+    <!-- TextView para exibir o valor atual do Bitcoin -->
+    <TextView
+        android:id="@+id/currentPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Current BTC Price: Loading..."
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" /> <!-- Define a cor do texto -->
+
+    <!-- Gráfico de linhas -->
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:background="@android:color/white" /> <!-- Define o fundo branco -->
+</LinearLayout>

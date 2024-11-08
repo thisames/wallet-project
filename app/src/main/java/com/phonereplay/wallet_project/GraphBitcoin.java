@@ -3,6 +3,7 @@ package com.phonereplay.wallet_project;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,21 +29,36 @@ public class GraphBitcoin extends AppCompatActivity {
     private LineDataSet lineDataSet;
     private BinanceApi binanceApi;
     private int xValue = 0;
+    private TextView currentPriceText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_bitcoin);
 
-        // Configurar o gráfico de linha
+        lineChart = findViewById(R.id.lineChart);
+        lineChart.setBackgroundColor(Color.WHITE);
+        lineChart.setDrawGridBackground(false);
+
+        currentPriceText = findViewById(R.id.currentPriceText);
+
         lineChart = findViewById(R.id.lineChart);
         lineDataSet = new LineDataSet(entries, "BTC Price");
         lineDataSet.setColor(Color.BLUE);
+        lineDataSet.setCircleColor(Color.BLUE);
+        lineDataSet.setLineWidth(2f);
+        lineDataSet.setCircleRadius(3f);
+        lineDataSet.setDrawCircleHole(false);
         lineDataSet.setValueTextColor(Color.BLACK);
         lineData = new LineData(lineDataSet);
         lineChart.setData(lineData);
 
-        // Configurar Retrofit
+        lineChart.getDescription().setEnabled(false);
+        lineChart.animateX(1000);
+        lineChart.getXAxis().setGranularity(1f);
+        lineChart.getAxisLeft().setGranularity(0.5f);
+        lineChart.getAxisRight().setEnabled(false);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.binance.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -50,12 +66,11 @@ public class GraphBitcoin extends AppCompatActivity {
 
         binanceApi = retrofit.create(BinanceApi.class);
 
-        // Atualizar preço em tempo real a cada 5 segundos
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 fetchPrice();
-                handler.postDelayed(this, 5000); // Atualizar a cada 5 segundos
+                handler.postDelayed(this, 5000);
             }
         }, 5000);
     }
@@ -70,6 +85,7 @@ public class GraphBitcoin extends AppCompatActivity {
                     if (priceResponse != null) {
                         float price = Float.parseFloat(priceResponse.getPrice());
                         updateChart(price);
+                        updatePriceText(price); // Atualiza o TextView com o preço atual
                     }
                 }
             }
@@ -86,6 +102,10 @@ public class GraphBitcoin extends AppCompatActivity {
         lineDataSet.notifyDataSetChanged();
         lineData.notifyDataChanged();
         lineChart.notifyDataSetChanged();
-        lineChart.invalidate(); // Redesenhar o gráfico
+        lineChart.invalidate();
+    }
+
+    private void updatePriceText(float price) {
+        currentPriceText.setText(String.format("$%.2f", price));
     }
 }
