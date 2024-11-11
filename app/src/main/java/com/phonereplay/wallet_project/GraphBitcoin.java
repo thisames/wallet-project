@@ -30,7 +30,7 @@ public class GraphBitcoin extends AppCompatActivity {
     private BinanceApi binanceApi;
     private int xValue = 0;
     private TextView currentPriceText;
-    private float previousPrice = -1; // Variável para armazenar o valor anterior do Bitcoin
+    private float previousPrice = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,6 @@ public class GraphBitcoin extends AppCompatActivity {
 
         currentPriceText = findViewById(R.id.currentPriceText);
 
-        // Configurar o gráfico de linha
         lineChart = findViewById(R.id.lineChart);
         lineDataSet = new LineDataSet(entries, "BTC Price");
         lineDataSet.setColor(Color.BLUE);
@@ -67,7 +66,6 @@ public class GraphBitcoin extends AppCompatActivity {
             fetchPrice();
         }
 
-        // Atualizar preço em tempo real a cada 5 segundos
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -94,7 +92,6 @@ public class GraphBitcoin extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PriceResponse> call, Throwable t) {
-                // Lidar com erros de rede
             }
         });
     }
@@ -104,25 +101,22 @@ public class GraphBitcoin extends AppCompatActivity {
         lineDataSet.notifyDataSetChanged();
         lineData.notifyDataChanged();
         lineChart.notifyDataSetChanged();
-        lineChart.invalidate(); // Redesenhar o gráfico
+        lineChart.invalidate();
     }
 
     private void updatePriceText(float price) {
-        // Verifica se o valor anterior foi definido
         if (previousPrice != -1) {
             if (price > previousPrice) {
-                currentPriceText.setTextColor(Color.parseColor("#428200")); // Cor verde personalizada
+                currentPriceText.setTextColor(Color.parseColor("#428200"));
             } else if (price < previousPrice) {
-                currentPriceText.setTextColor(Color.parseColor("#F63756")); // Cor verde personalizada
+                currentPriceText.setTextColor(Color.parseColor("#F63756"));
             } else {
-                currentPriceText.setTextColor(Color.BLACK); // Cor preta para inalterado
+                currentPriceText.setTextColor(Color.BLACK);
             }
         }
 
-        // Atualiza o TextView com o preço atual formatado
         currentPriceText.setText(String.format("$%.2f", price));
 
-        // Atualiza o valor anterior
         previousPrice = price;
     }
 }
