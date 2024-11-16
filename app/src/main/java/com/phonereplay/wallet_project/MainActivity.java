@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "BitcoinWallet";
     private WalletAppKit walletAppKit;
-
+    // sla
     private TextView addressText;
     private TextView privateKeyText;
     private TextView balanceText;
