@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView addressText;
     private TextView privateKeyText;
     private TextView balanceText;
-
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
