@@ -3,6 +3,7 @@ package com.phonereplay.wallet_project;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,10 @@ public class GraphBitcoin extends AppCompatActivity {
     private int xValue = 0;
     private TextView currentPriceText;
     private float previousPrice = -1;
+
+    private boolean isInDollars = true;
+    private String currentSymbol = "BTCUSDT";
+    private String currencySymbol = "$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,13 @@ public class GraphBitcoin extends AppCompatActivity {
             fetchPrice();
         }
 
+        currentPriceText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleCurrency();
+            }
+        });
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -75,8 +87,25 @@ public class GraphBitcoin extends AppCompatActivity {
         }, 5000);
     }
 
+    private void toggleCurrency() {
+        isInDollars = !isInDollars;
+        if (isInDollars) {
+            currentSymbol = "BTCUSDT";
+            currencySymbol = "$";
+        } else {
+            currentSymbol = "BTCBRL";
+            currencySymbol = "R$";
+        }
+
+        entries.clear();
+        xValue = 0;
+        previousPrice = -1;
+
+        fetchPrice();
+    }
+
     private void fetchPrice() {
-        Call<PriceResponse> call = binanceApi.getPrice("BTCUSDT");
+        Call<PriceResponse> call = binanceApi.getPrice(currentSymbol);
         call.enqueue(new Callback<PriceResponse>() {
             @Override
             public void onResponse(Call<PriceResponse> call, Response<PriceResponse> response) {
@@ -115,7 +144,7 @@ public class GraphBitcoin extends AppCompatActivity {
             }
         }
 
-        currentPriceText.setText(String.format("$%.2f", price));
+        currentPriceText.setText(String.format("%s%.2f", currencySymbol, price));
 
         previousPrice = price;
     }
