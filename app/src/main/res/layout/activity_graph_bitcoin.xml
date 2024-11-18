@@ -11,15 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Current BTC Price: Loading..."
+        android:text="..."
         android:textColor="@android:color/black"
         android:textSize="30sp"
-        android:textStyle="bold" /> <!-- Define a cor do texto -->
+        android:textStyle="bold" />
+
+    <!-- Define a cor do texto -->
 
     <!-- Gráfico de linhas -->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="config" />
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white" /> <!-- Define o fundo branco -->
+        android:background="@android:color/white" />
+    <!-- Define o fundo branco -->
 </LinearLayout>
