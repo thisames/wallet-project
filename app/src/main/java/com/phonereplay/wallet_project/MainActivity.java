@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         addressText.setText(address);
         privateKeyText.setText(privateKey);
-        balanceText.setText("Saldo: " + balance.toFriendlyString());
+        balanceText.setText(balance.toFriendlyString());
 
         Log.d(TAG, "Bitcoin Address: " + address);
         Log.d(TAG, "Private Key (WIF): " + privateKey);
