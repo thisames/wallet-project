@@ -1,5 +1,6 @@
 package com.phonereplay.wallet_project;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class GraphBitcoin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_bitcoin);
+        MaterialButton button = findViewById(R.id.button_to_graph_config);
 
         currentPriceText = findViewById(R.id.currentPriceText);
 
@@ -72,10 +75,16 @@ public class GraphBitcoin extends AppCompatActivity {
         }
 
         currentPriceText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleCurrency();
-            }
+                                                @Override
+                                                public void onClick(View v) {
+                                                    toggleCurrency();
+                                                }
+                                            }
+        );
+
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(GraphBitcoin.this, GraphConfig.class);
+            startActivity(intent);
         });
 
         handler.postDelayed(new Runnable() {
