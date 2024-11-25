@@ -70,5 +70,6 @@ A aplicação prioriza a segurança e a experiência do usuário:
 
 utilizamos as seguintes ferramentas de análise estática de codigo:
 
+- **Spotless**:
 - **SonarLint**:
 - **Android Lint**:
