@@ -23,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GraphBitcoin extends AppCompatActivity {
+public class GraphBitcoinActivity extends AppCompatActivity {
 
     private final ArrayList<Entry> entries = new ArrayList<>();
     private final Handler handler = new Handler();
@@ -83,7 +83,7 @@ public class GraphBitcoin extends AppCompatActivity {
         );
 
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(GraphBitcoin.this, GraphConfig.class);
+            Intent intent = new Intent(GraphBitcoinActivity.this, GraphConfig.class);
             startActivity(intent);
         });
 

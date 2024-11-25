@@ -2,11 +2,15 @@ package com.phonereplay.wallet_project;
 
 import android.os.Bundle;
 
+import android.widget.NumberPicker;
+import android.widget.TimePicker;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.concurrent.TimeUnit;
 
 public class GraphConfig extends AppCompatActivity {
 
@@ -20,5 +24,16 @@ public class GraphConfig extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TimePicker timePicker = findViewById(R.id.timePicker);
+        NumberPicker secondsPicker = findViewById(R.id.secondsPicker);
+
+        timePicker.setHour(0);
+        timePicker.setMinute(1);
+        secondsPicker.setValue(0);
+
+        long updateIntervalMillis = TimeUnit.HOURS.toMillis(timePicker.getHour()) +
+                TimeUnit.MINUTES.toMillis(timePicker.getMinute()) +
+                TimeUnit.SECONDS.toMillis(secondsPicker.getValue());
     }
 }

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         openGraphButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GraphBitcoin.class);
+            Intent intent = new Intent(MainActivity.this, GraphBitcoinActivity.class);
             startActivity(intent);
         });
     }
