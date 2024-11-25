@@ -65,3 +65,11 @@ A aplicação prioriza a segurança e a experiência do usuário:
 - **Plataforma**: Android
 
 ---
+
+## Análise de Código Estático
+
+utilizamos as seguintes ferramentas de análise estática de codigo:
+
+- **Spotless**:
+- **SonarLint**:
+- **Android Lint**:

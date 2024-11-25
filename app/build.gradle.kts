@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.spotless) // Adicionando o plugin Spotless
 }
 
 android {
@@ -35,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.mpandroidchart)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -50,4 +50,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+}
+
+spotless {
+    java {
+        googleJavaFormat("1.15.0")
+        target("src/**/*.java")
+    }
+    kotlin {
+        ktlint()
+        target("src/**/*.kt")
+    }
 }
