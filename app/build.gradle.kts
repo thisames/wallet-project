@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.mpandroidchart)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-
+    implementation("com.google.android.material:material:1.9.0")
     implementation("org.bitcoinj:bitcoinj-core:0.16.3")
     implementation(libs.appcompat)
     implementation(libs.material)

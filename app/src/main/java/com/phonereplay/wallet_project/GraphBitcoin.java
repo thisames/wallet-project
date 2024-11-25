@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -43,8 +43,7 @@ public class GraphBitcoin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_bitcoin);
-        Button button = findViewById(R.id.button);
-
+        MaterialButton button = findViewById(R.id.button_to_graph_config);
 
         currentPriceText = findViewById(R.id.currentPriceText);
 

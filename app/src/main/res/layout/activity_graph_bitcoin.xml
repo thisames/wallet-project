@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:padding="16dp"> <!-- Define o fundo branco -->
+    android:padding="16dp">
 
     <!-- TextView para exibir o valor atual do Bitcoin -->
     <TextView
@@ -16,20 +17,23 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <!-- Define a cor do texto -->
+    <!-- Botão de configuração com ícone de engrenagem -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_to_graph_config"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="Configuração"
+        app:icon="@drawable/ic_settings"
+        app:iconGravity="textStart"
+        app:iconSize="35dp"
+        app:iconTint="@android:color/black" />
 
     <!-- Gráfico de linhas -->
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="config" />
-
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white" />
-    <!-- Define o fundo branco -->
 </LinearLayout>
