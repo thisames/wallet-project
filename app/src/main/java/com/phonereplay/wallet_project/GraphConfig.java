@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class GraphConfig extends AppCompatActivity {
 
-    GraphBitcoinConfig graphBitcoinConfig = new GraphBitcoinConfig();
+    GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,24 +29,30 @@ public class GraphConfig extends AppCompatActivity {
 
         TextInputEditText timePicker = findViewById(R.id.timeInput);
 
+        timePicker.setText(String.valueOf(config.getTimeUpdateGraph()));
+
         timePicker.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                timePicker.setText(s.toString());
-                graphBitcoinConfig.setTimeUpdateGraph(Integer.parseInt(s.toString()));
-                System.out.println();
+                if (s != null) {
+                    try {
+                        int time = Integer.parseInt(s.toString());
+                        // TODO - necessario implementar uma funcao de conversao do time digitado para o tempo em milisegundos.
+                        //https://github.com/thisames/wallet-project/issues/24
+                        config.setTimeUpdateGraph(time);
+                    } catch (NumberFormatException e) {
+                        timePicker.setError("Invalid input! Please enter a valid number.");
+                    }
+                }
             }
         });
-
     }
 }
