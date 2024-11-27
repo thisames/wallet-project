@@ -1,18 +1,20 @@
 package com.phonereplay.wallet_project;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 
-import android.widget.NumberPicker;
-import android.widget.TimePicker;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.concurrent.TimeUnit;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class GraphConfig extends AppCompatActivity {
+
+    GraphBitcoinConfig graphBitcoinConfig = new GraphBitcoinConfig();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +27,26 @@ public class GraphConfig extends AppCompatActivity {
             return insets;
         });
 
-        TimePicker timePicker = findViewById(R.id.timePicker);
-        NumberPicker secondsPicker = findViewById(R.id.secondsPicker);
+        TextInputEditText timePicker = findViewById(R.id.timeInput);
 
-        timePicker.setHour(0);
-        timePicker.setMinute(1);
-        secondsPicker.setValue(0);
+        timePicker.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        long updateIntervalMillis = TimeUnit.HOURS.toMillis(timePicker.getHour()) +
-                TimeUnit.MINUTES.toMillis(timePicker.getMinute()) +
-                TimeUnit.SECONDS.toMillis(secondsPicker.getValue());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                timePicker.setText(s.toString());
+                graphBitcoinConfig.setTimeUpdateGraph(Integer.parseInt(s.toString()));
+                System.out.println();
+            }
+        });
+
     }
 }
