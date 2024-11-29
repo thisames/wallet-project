@@ -16,6 +16,11 @@ public class GraphConfig extends AppCompatActivity {
 
     GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
 
+    private int convertToMilliseconds(int time) {
+        return time * 1000;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +50,8 @@ public class GraphConfig extends AppCompatActivity {
                 if (s != null) {
                     try {
                         int time = Integer.parseInt(s.toString());
-                        // TODO - necessario implementar uma funcao de conversao do time digitado para o tempo em milisegundos.
-                        //https://github.com/thisames/wallet-project/issues/24
-                        config.setTimeUpdateGraph(time);
+                        int timeInMilliseconds = convertToMilliseconds(time);
+                        config.setTimeUpdateGraph(timeInMilliseconds);
                     } catch (NumberFormatException e) {
                         timePicker.setError("Invalid input! Please enter a valid number.");
                     }
