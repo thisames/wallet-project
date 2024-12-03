@@ -1,5 +1,6 @@
 package com.phonereplay.wallet_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -47,6 +48,10 @@ public class GraphConfig extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                Intent intent = new Intent(GraphConfig.this, PreviewActivity.class);
+                startActivity(intent);
+                
                 if (s != null) {
                     try {
                         int time = Integer.parseInt(s.toString());
