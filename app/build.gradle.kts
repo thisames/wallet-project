@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.spotless) // Adicionando o plugin Spotless
 }
 
 android {
@@ -35,12 +36,10 @@ android {
 }
 
 dependencies {
-
     implementation(libs.mpandroidchart)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("org.bitcoinj:bitcoinj-core:0.16.3")
+    implementation(libs.bitcoinj.core)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -51,4 +50,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+}
+
+spotless {
+    java {
+        googleJavaFormat("1.15.0")
+        target("src/**/*.java")
+    }
+    kotlin {
+        ktlint()
+        target("src/**/*.kt")
+    }
 }

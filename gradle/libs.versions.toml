@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0"
+bitcoinjCore = "0.16.3"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -13,6 +14,7 @@ navigationUi = "2.8.1"
 retrofit = "2.9.0"
 
 [libraries]
+bitcoinj-core = { module = "org.bitcoinj:bitcoinj-core", version.ref = "bitcoinjCore" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -28,4 +30,5 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+spotless = { id = 'com.diffplug.spotless', version = '6.25.0' }
 

@@ -6,7 +6,7 @@
     <!-- Área de Exibição do Saldo -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:background="#00BCD4"
         android:gravity="center"
         android:orientation="vertical"
@@ -65,16 +65,7 @@
             android:text="Generating private key..."
             android:textSize="16sp" />
 
-        <!-- Botão para criar a carteira -->
-        <Button
-            android:id="@+id/createWalletButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="#00BCD4"
-            android:text="Create/Load Wallet"
-            android:textColor="#FFFFFF" />
-
+        <!-- Botão para abrir o gráfico -->
         <Button
             android:id="@+id/openGraphButton"
             android:layout_width="match_parent"
