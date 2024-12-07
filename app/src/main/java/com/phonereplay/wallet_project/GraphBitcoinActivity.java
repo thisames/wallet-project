@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +26,7 @@ public class GraphBitcoinActivity extends AppCompatActivity {
 
     private final ArrayList<Entry> entries = new ArrayList<>();
     private final Handler handler = new Handler();
+    GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
     private LineChart lineChart;
     private LineData lineData;
     private LineDataSet lineDataSet;
@@ -34,16 +34,28 @@ public class GraphBitcoinActivity extends AppCompatActivity {
     private int xValue = 0;
     private TextView currentPriceText;
     private float previousPrice = -1;
-
     private boolean isInDollars = true;
     private String currentSymbol = "BTCUSDT";
     private String currencySymbol = "$";
+
+    private int timeUpdateGraph;
+
+    @Override
+    protected void onResume() {
+        setTimeUpdateGraph();
+        super.onResume();
+    }
+
+    private void setTimeUpdateGraph() {
+        this.timeUpdateGraph = convertToMilliseconds(config.getTimeUpdateGraph());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_bitcoin);
         MaterialButton button = findViewById(R.id.button_to_graph_config);
+        setTimeUpdateGraph();
 
         currentPriceText = findViewById(R.id.currentPriceText);
 
@@ -70,17 +82,12 @@ public class GraphBitcoinActivity extends AppCompatActivity {
                 .build();
 
         binanceApi = retrofit.create(BinanceApi.class);
+
         if (previousPrice == -1) {
             fetchPrice();
         }
 
-        currentPriceText.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    toggleCurrency();
-                                                }
-                                            }
-        );
+        currentPriceText.setOnClickListener(v -> toggleCurrency());
 
         button.setOnClickListener(v -> {
             Intent intent = new Intent(GraphBitcoinActivity.this, GraphConfig.class);
@@ -91,9 +98,9 @@ public class GraphBitcoinActivity extends AppCompatActivity {
             @Override
             public void run() {
                 fetchPrice();
-                handler.postDelayed(this, 5000);
+                handler.postDelayed(this, timeUpdateGraph);
             }
-        }, 5000);
+        }, timeUpdateGraph);
     }
 
     private void toggleCurrency() {
@@ -111,6 +118,10 @@ public class GraphBitcoinActivity extends AppCompatActivity {
         previousPrice = -1;
 
         fetchPrice();
+    }
+
+    private int convertToMilliseconds(int time) {
+        return time * 1000;
     }
 
     private void fetchPrice() {

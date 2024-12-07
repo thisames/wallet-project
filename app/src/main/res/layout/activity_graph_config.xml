@@ -16,20 +16,28 @@
         <!-- Exibição do Endereço -->
         <TextView
             android:id="@+id/addressLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="tempo de atualização de grafico"
+            android:text="settings"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/timeInput"
-            android:layout_width="252dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/openUpdateTimeGraphDialog"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter time"
-            android:inputType="time" />
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button_background"
+            android:drawableEnd="@drawable/icon_arrow"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:text="tempo de atualização de grafico"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 
