@@ -1,8 +1,11 @@
 package com.phonereplay.wallet_project;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +13,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 public class GraphConfig extends AppCompatActivity {
 
     GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
 
-    private int convertToMilliseconds(int time) {
-        return time * 1000;
-    }
-
+    Button openUpdateTimeGraphDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,31 +30,35 @@ public class GraphConfig extends AppCompatActivity {
             return insets;
         });
 
-        TextInputEditText timePicker = findViewById(R.id.timeInput);
+        openUpdateTimeGraphDialog = findViewById(R.id.openUpdateTimeGraphDialog);
 
-        timePicker.setText(String.valueOf(config.getTimeUpdateGraph()));
+        updateButtonText();
+        paintTimeUpdateGraphTextButton();
 
-        timePicker.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s != null) {
-                    try {
-                        int time = Integer.parseInt(s.toString());
-                        int timeInMilliseconds = convertToMilliseconds(time);
-                        config.setTimeUpdateGraph(timeInMilliseconds);
-                    } catch (NumberFormatException e) {
-                        timePicker.setError("Invalid input! Please enter a valid number.");
-                    }
-                }
-            }
+        openUpdateTimeGraphDialog.setOnClickListener(v -> {
+            DialogSelectUpdateTimeGraph dialog = new DialogSelectUpdateTimeGraph(openUpdateTimeGraphDialog);
+            dialog.show(getSupportFragmentManager(), "UpdateTimeGraphDialog");
         });
+    }
+
+    void updateButtonText() {
+        openUpdateTimeGraphDialog.setText("Tempo de atualização de gráfico " + config.getTimeUpdateGraph());
+    }
+
+    void paintTimeUpdateGraphTextButton() {
+        CharSequence text = openUpdateTimeGraphDialog.getText();
+
+        for (int i = 0; i < text.length(); i++) {
+            if (Character.isDigit(text.charAt(i))) {
+                SpannableString spannableString = new SpannableString(text);
+                spannableString.setSpan(
+                        new ForegroundColorSpan(Color.parseColor("#717175")),
+                        i,
+                        i + 1,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                );
+                openUpdateTimeGraphDialog.setText(spannableString);
+            }
+        }
     }
 }
