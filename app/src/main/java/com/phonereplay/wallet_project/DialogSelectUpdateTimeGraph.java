@@ -3,7 +3,6 @@ package com.phonereplay.wallet_project;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -14,13 +13,9 @@ import java.util.List;
 public class DialogSelectUpdateTimeGraph extends DialogFragment
     implements WheelPicker.OnItemSelectedListener {
 
-  Button openUpdateTimeGraphDialog;
-
   GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
 
-  DialogSelectUpdateTimeGraph(Button openUpdateTimeGraphDialog) {
-    this.openUpdateTimeGraphDialog = openUpdateTimeGraphDialog;
-  }
+  DialogSelectUpdateTimeGraph() {}
 
   @Override
   public void onResume() {

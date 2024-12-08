@@ -38,8 +38,7 @@ public class GraphConfig extends AppCompatActivity {
 
     openUpdateTimeGraphDialog.setOnClickListener(
         v -> {
-          DialogSelectUpdateTimeGraph dialog =
-              new DialogSelectUpdateTimeGraph(openUpdateTimeGraphDialog);
+          DialogSelectUpdateTimeGraph dialog = new DialogSelectUpdateTimeGraph();
           dialog.show(getSupportFragmentManager(), "UpdateTimeGraphDialog");
         });
   }
