@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.File;
+
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.wallet.Wallet;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +20,7 @@ public class MainActivity extends AppCompatActivity {
   private static final String WALLET_FILE_NAME = "user_wallet";
 
   private TextView addressText;
-  private TextView privateKeyText;
   private TextView balanceText;
-
-  private Wallet wallet;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     addressText = findViewById(R.id.addressText);
-    privateKeyText = findViewById(R.id.privateKeyText);
     balanceText = findViewById(R.id.balanceText);
     Button openGraphButton = findViewById(R.id.openGraphButton);
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void loadWallet(File walletFile) {
     try {
-      wallet = Wallet.loadFromFile(walletFile);
+      Wallet wallet = Wallet.loadFromFile(walletFile);
 
       updateUIWithWalletData(wallet);
       Log.d(TAG, "Wallet carregada com sucesso.");
@@ -61,16 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
   private void updateUIWithWalletData(Wallet wallet) {
     String address = wallet.currentReceiveAddress().toString();
-    String privateKey =
-        wallet.currentReceiveKey().getPrivateKeyEncoded(wallet.getParams()).toString();
     Coin balance = wallet.getBalance();
 
     addressText.setText(address);
-    privateKeyText.setText(privateKey);
     balanceText.setText(balance.toFriendlyString());
 
     Log.d(TAG, "Endereço Bitcoin: " + address);
-    Log.d(TAG, "Chave Privada (WIF): " + privateKey);
     Log.d(TAG, "Saldo: " + balance.toFriendlyString());
   }
 }
