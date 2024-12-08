@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.LineChart;
@@ -12,6 +13,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
+import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GraphBitcoinActivity extends AppCompatActivity {
 
   private final ArrayList<Entry> entries = new ArrayList<>();
-  private final Handler handler = new Handler();
+  private final Handler handler = new Handler(Objects.requireNonNull(Looper.myLooper()));
   GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
   private LineChart lineChart;
   private LineData lineData;
