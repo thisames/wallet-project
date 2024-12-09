@@ -18,9 +18,10 @@
             android:id="@+id/addressLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="16dp"
-            android:text="settings"
-            android:textSize="18sp"
+            android:text="graph settings"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
