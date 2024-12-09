@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.phonereplay.wallet_project.MainActivity;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,8 +70,8 @@ public class ButtonStopwatch extends AppCompatButton {
         1000);
   }
 
-    public void setTimeStamp(int timeStamp) {
-        timeStamp = timeStamp * 1000;
-        this.timeStamp = timeStamp;
-    }
+  public void setTimeStamp(int timeStamp) {
+    timeStamp = timeStamp * 1000;
+    this.timeStamp = timeStamp;
+  }
 }
