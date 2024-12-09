@@ -6,30 +6,37 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- TextView para exibir o valor atual do Bitcoin -->
-    <TextView
-        android:id="@+id/currentPriceText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="..."
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <!-- Botão de configuração com ícone de engrenagem -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_to_graph_config"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="end"
-        android:backgroundTint="@android:color/transparent"
-        android:contentDescription="Configuração"
-        app:icon="@drawable/ic_settings"
-        app:iconGravity="textStart"
-        app:iconSize="35dp"
-        app:iconTint="@android:color/black" />
+        <!-- TextView para exibir o valor atual do Bitcoin -->
+        <TextView
+            android:id="@+id/currentPriceText"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="..."
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
+        <!-- Botão de configuração com ícone de engrenagem -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_to_graph_config"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Configuração"
+            app:icon="@drawable/ic_settings"
+            app:iconGravity="textStart"
+            app:iconSize="35dp"
+            app:iconTint="@android:color/black" />
+
+    </LinearLayout>
     <!-- Gráfico de linhas -->
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
