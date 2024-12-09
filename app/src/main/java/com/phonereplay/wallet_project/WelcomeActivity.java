@@ -3,18 +3,21 @@ package com.phonereplay.wallet_project;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import java.io.File;
-import java.security.SecureRandom;
+
 import org.bitcoinj.params.TestNet3Params;
 import org.bitcoinj.script.Script;
 import org.bitcoinj.wallet.DeterministicSeed;
 import org.bitcoinj.wallet.KeyChainGroupStructure;
 import org.bitcoinj.wallet.Wallet;
+
+import java.io.File;
+import java.security.SecureRandom;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -85,7 +88,8 @@ public class WelcomeActivity extends AppCompatActivity {
   }
 
   private void showModal() {
-    DialogCopySeedsFragment dialog = new DialogCopySeedsFragment(wallet);
+    DialogCopySeedsFragment dialog =
+        new DialogCopySeedsFragment(wallet.getKeyChainSeed().getMnemonicCode());
     dialog.show(getSupportFragmentManager(), "startGameDialog");
   }
 }

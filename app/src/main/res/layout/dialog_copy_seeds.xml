@@ -24,4 +24,10 @@
         android:paddingBottom="16dp"
         android:textColor="?attr/colorOnBackground"
         android:textSize="18sp" />
+
+    <com.phonereplay.wallet_project.components.ButtonStopwatch
+        android:id="@+id/positive_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm" />
 </LinearLayout>
