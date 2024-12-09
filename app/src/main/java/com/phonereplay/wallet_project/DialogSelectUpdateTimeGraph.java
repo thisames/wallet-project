@@ -3,10 +3,13 @@ package com.phonereplay.wallet_project;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import com.aigestudio.wheelpicker.WheelPicker;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,20 +56,14 @@ public class DialogSelectUpdateTimeGraph extends DialogFragment
   }
 
   private int getSelectedItemPosition(List<String> numbersData) {
-    for (int i = 0; i < numbersData.size(); i++) {
-      if (numbersData.get(i).equals(String.valueOf(config.getTimeUpdateGraph()))) {
-        return i;
-      }
-    }
-    return 0;
+    return numbersData.indexOf(String.valueOf(config.getTimeUpdateGraph()));
   }
 
   private List<String> generateNumbersData() {
     List<String> bloodTypes = new ArrayList<>();
 
     for (int i = 1; i < 10; i++) {
-      Integer inte = Integer.valueOf(i);
-      bloodTypes.add(inte.toString());
+      bloodTypes.add(i + "");
     }
     return bloodTypes;
   }
