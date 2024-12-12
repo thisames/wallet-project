@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.zxing.android.embedded)
     implementation(libs.mpandroidchart)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)

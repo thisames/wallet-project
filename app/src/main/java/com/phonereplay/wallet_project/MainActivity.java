@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
     addressText = findViewById(R.id.addressText);
     balanceText = findViewById(R.id.balanceText);
     Button openGraphButton = findViewById(R.id.openGraphButton);
+    LinearLayout receiveButton = findViewById(R.id.receiveButton);
+
+    receiveButton.setOnClickListener(
+        v -> {
+          DialogQRCodeBTCAddress dialog =
+              new DialogQRCodeBTCAddress(addressText.getText().toString());
+          dialog.show(getSupportFragmentManager(), "QRCodeDialog");
+        });
 
     openGraphButton.setOnClickListener(
         v -> {
