@@ -1,18 +1,15 @@
 package com.phonereplay.wallet_project;
 
 import androidx.annotation.NonNull;
-
 import com.phonereplay.wallet_project.configuration.InitConfig;
-
+import java.io.File;
+import java.io.IOException;
+import java.security.SecureRandom;
 import org.bitcoinj.params.AbstractBitcoinNetParams;
 import org.bitcoinj.script.Script;
 import org.bitcoinj.wallet.DeterministicSeed;
 import org.bitcoinj.wallet.KeyChainGroupStructure;
 import org.bitcoinj.wallet.Wallet;
-
-import java.io.File;
-import java.io.IOException;
-import java.security.SecureRandom;
 
 public class WalletAbstraction implements WalletAbstractionInterface {
 
