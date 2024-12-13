@@ -1,5 +1,6 @@
-package com.phonereplay.wallet_project;
+package com.phonereplay.wallet_project.network.binance;
 
+import com.phonereplay.wallet_project.PriceResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

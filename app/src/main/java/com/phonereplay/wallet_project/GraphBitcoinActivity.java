@@ -12,13 +12,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.button.MaterialButton;
+import com.phonereplay.wallet_project.network.binance.BinanceClient;
 import java.util.ArrayList;
 import java.util.Objects;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GraphBitcoinActivity extends AppCompatActivity {
 
@@ -28,12 +24,11 @@ public class GraphBitcoinActivity extends AppCompatActivity {
   private LineChart lineChart;
   private LineData lineData;
   private LineDataSet lineDataSet;
-  private BinanceApi binanceApi;
+  private BinanceClient binanceClient;
   private int xValue = 0;
   private TextView currentPriceText;
   private float previousPrice = -1;
   private boolean isInDollars = true;
-  private String currentSymbol = "BTCUSDT";
   private String currencySymbol = "$";
 
   private int timeUpdateGraph;
@@ -74,16 +69,10 @@ public class GraphBitcoinActivity extends AppCompatActivity {
     lineChart.getAxisLeft().setGranularity(0.5f);
     lineChart.getAxisRight().setEnabled(false);
 
-    Retrofit retrofit =
-        new Retrofit.Builder()
-            .baseUrl("https://api.binance.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    binanceApi = retrofit.create(BinanceApi.class);
+    binanceClient = new BinanceClient();
 
     if (previousPrice == -1) {
-      fetchPrice();
+      updateChart();
     }
 
     currentPriceText.setOnClickListener(v -> toggleCurrency());
@@ -99,7 +88,7 @@ public class GraphBitcoinActivity extends AppCompatActivity {
 
           @Override
           public void run() {
-            fetchPrice();
+            updateChart();
             handler.postDelayed(this, timeUpdateGraph);
           }
         },
@@ -109,10 +98,10 @@ public class GraphBitcoinActivity extends AppCompatActivity {
   private void toggleCurrency() {
     isInDollars = !isInDollars;
     if (isInDollars) {
-      currentSymbol = "BTCUSDT";
+      binanceClient.setCurrentSymbol("BTCUSDT");
       currencySymbol = "$";
     } else {
-      currentSymbol = "BTCBRL";
+      binanceClient.setCurrentSymbol("BTCBRL");
       currencySymbol = "R$";
     }
 
@@ -120,33 +109,17 @@ public class GraphBitcoinActivity extends AppCompatActivity {
     xValue = 0;
     previousPrice = -1;
 
-    fetchPrice();
+    updateChart();
   }
 
   private int convertToMilliseconds(int time) {
     return time * 1000;
   }
 
-  private void fetchPrice() {
-    Call<PriceResponse> call = binanceApi.getPrice(currentSymbol);
-    call.enqueue(
-        new Callback<PriceResponse>() {
-
-          @Override
-          public void onResponse(Call<PriceResponse> call, Response<PriceResponse> response) {
-            if (response.isSuccessful()) {
-              PriceResponse priceResponse = response.body();
-              if (priceResponse != null) {
-                float price = Float.parseFloat(priceResponse.getPrice());
-                updateChart(price);
-                updatePriceText(price);
-              }
-            }
-          }
-
-          @Override
-          public void onFailure(Call<PriceResponse> call, Throwable t) {}
-        });
+  private void updateChart() {
+    float price = binanceClient.fetchPriceSync();
+    updateChart(price);
+    updatePriceText(price);
   }
 
   private void updateChart(float price) {

@@ -3,17 +3,14 @@ package com.phonereplay.wallet_project;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+import java.io.File;
 import org.bitcoinj.wallet.DeterministicSeed;
 import org.bitcoinj.wallet.Wallet;
-
-import java.io.File;
 
 public class WelcomeActivity extends AppCompatActivity {
 
