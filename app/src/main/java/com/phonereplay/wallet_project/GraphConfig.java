@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.phonereplay.wallet_project.dialog.DialogSelectUpdateTimeGraph;
 
 public class GraphConfig extends AppCompatActivity {
 
@@ -43,12 +44,12 @@ public class GraphConfig extends AppCompatActivity {
         });
   }
 
-  void updateButtonText() {
+  public void updateButtonText() {
     openUpdateTimeGraphDialog.setText(
         "Tempo de atualização de gráfico " + config.getTimeUpdateGraph());
   }
 
-  void paintTimeUpdateGraphTextButton() {
+  public void paintTimeUpdateGraphTextButton() {
     CharSequence text = openUpdateTimeGraphDialog.getText();
 
     for (int i = 0; i < text.length(); i++) {

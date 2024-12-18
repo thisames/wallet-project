@@ -1,4 +1,4 @@
-package com.phonereplay.wallet_project;
+package com.phonereplay.wallet_project.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.aigestudio.wheelpicker.WheelPicker;
+import com.phonereplay.wallet_project.GraphBitcoinConfig;
+import com.phonereplay.wallet_project.GraphConfig;
+import com.phonereplay.wallet_project.R;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ public class DialogSelectUpdateTimeGraph extends DialogFragment
 
   GraphBitcoinConfig config = GraphBitcoinConfig.getInstance();
 
-  DialogSelectUpdateTimeGraph() {}
+  public DialogSelectUpdateTimeGraph() {}
 
   @Override
   public void onResume() {

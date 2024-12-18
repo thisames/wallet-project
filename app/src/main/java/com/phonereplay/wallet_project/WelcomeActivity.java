@@ -3,14 +3,19 @@ package com.phonereplay.wallet_project;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import java.io.File;
-import org.bitcoinj.wallet.DeterministicSeed;
+
+import com.phonereplay.wallet_project.dialog.DialogCopySeedsFragment;
+import com.phonereplay.wallet_project.dialog.DialogImportSeedsFragment;
+
 import org.bitcoinj.wallet.Wallet;
+
+import java.io.File;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -38,8 +43,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
     importWalletButton.setOnClickListener(
         v -> {
-          // TODO implementar importação de carteira
-        });
+            DialogImportSeedsFragment dialog = new DialogImportSeedsFragment(walletFile);
+            dialog.show(getSupportFragmentManager(), "ImportSeedsDialog");
+        }
+
+        );
 
     /**
      * Listener para o botão "createWalletButton". Este método é chamado quando o botão de criação
@@ -57,8 +65,7 @@ public class WelcomeActivity extends AppCompatActivity {
         v -> {
           try {
             WalletAbstraction walletAbstraction = new WalletAbstraction();
-            DeterministicSeed seed = walletAbstraction.getDeterministicSeed();
-            Wallet wallet = walletAbstraction.createWallet(seed, walletFile);
+            Wallet wallet = walletAbstraction.createWallet(walletFile);
 
             showModal(wallet);
           } catch (Exception e) {

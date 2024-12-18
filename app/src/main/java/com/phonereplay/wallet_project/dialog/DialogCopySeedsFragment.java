@@ -1,4 +1,4 @@
-package com.phonereplay.wallet_project;
+package com.phonereplay.wallet_project.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import com.phonereplay.wallet_project.R;
 import com.phonereplay.wallet_project.components.ButtonStopwatch;
 import java.util.List;
 
